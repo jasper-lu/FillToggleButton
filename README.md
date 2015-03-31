@@ -4,7 +4,7 @@ Toggle Button that fills in with a defined color
 <img src="/src/main/res/drawable/demo_imgs.png" align="left" height="100" />
 <br />
 <br />
-
+-----
 ##How to Use
 TODO: Publish to central maven
 
