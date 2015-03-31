@@ -10,9 +10,19 @@ import android.widget.ToggleButton;
  * Created by Jasper on 3/31/2015.
  */
 public class FillToggle extends ToggleButton {
-    private int checkedFill, checkedBorder, uncheckedFill, uncheckedBorder, pressedFill, pressedBorder, onTextColor, offTextColor;
+    private int checkedFill;
+    private int checkedBorder;
+    private int uncheckedFill;
+    private int uncheckedBorder;
+    private int pressedFill;
+    private int pressedBorder;
+    private int onTextColor;
+    private int offTextColor;
+
     private ToggleSelector backgroundSelector;
     private ToggleTextColor textColor;
+
+    ShapeDrawable checked, unchecked, pressed;
 
     public FillToggle(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -21,8 +31,9 @@ public class FillToggle extends ToggleButton {
 
         setColors(a);
 
-        ShapeDrawable checked, unchecked, pressed;
-        if (a.getString(R.styleable.FillToggle_shape) == "square") {
+        String shape = a.getString(R.styleable.FillToggle_shape);
+        if (shape != null && shape.equals("rectangle"))
+        {
             checked = new RectDrawable (checkedFill, checkedBorder);
             unchecked = new RectDrawable (uncheckedFill, uncheckedBorder);
             pressed = new RectDrawable (pressedFill, pressedBorder);
@@ -40,7 +51,9 @@ public class FillToggle extends ToggleButton {
 
     private void setColors(TypedArray a) {
         int defaultRed = getResources().getColor(R.color.myRed);
+        int defaultPureWhite = getResources().getColor(R.color.white);
         int defaultWhite = getResources().getColor(R.color.smokyWhite);
+
         int defaultGrey = getResources().getColor(R.color.grey);
         int defaultDarkGrey = getResources().getColor(R.color.darkGrey);
 
@@ -51,7 +64,7 @@ public class FillToggle extends ToggleButton {
         pressedFill = a.getColor(R.styleable.FillToggle_pressed_fill, defaultGrey);
         pressedBorder = a.getColor(R.styleable.FillToggle_pressed_border, defaultDarkGrey);
 
-        onTextColor = a.getColor(R.styleable.FillToggle_on_text_color, defaultWhite);
+        onTextColor = a.getColor(R.styleable.FillToggle_on_text_color, defaultPureWhite);
         offTextColor = a.getColor(R.styleable.FillToggle_off_text_color, defaultDarkGrey);
     }
 
@@ -62,5 +75,79 @@ public class FillToggle extends ToggleButton {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         return super.onTouchEvent(event);
+    }
+
+    /** getters and setters... bleh **/
+
+    public int getCheckedFill() {
+        return checkedFill;
+    }
+
+    public void setCheckedFill(int checkedFill) {
+        this.checkedFill = checkedFill;
+        checked.setFillColor(checkedFill);
+    }
+
+    public int getCheckedBorder() {
+        return checkedBorder;
+    }
+
+    public void setCheckedBorder(int checkedBorder) {
+        this.checkedBorder = checkedBorder;
+        checked.setBorderColor(checkedBorder);
+    }
+
+    public int getUncheckedFill() {
+        return uncheckedFill;
+    }
+
+    public void setUncheckedFill(int uncheckedFill) {
+        this.uncheckedFill = uncheckedFill;
+        unchecked.setFillColor(uncheckedFill);
+    }
+
+    public int getUncheckedBorder() {
+        return uncheckedBorder;
+    }
+
+    public void setUncheckedBorder(int uncheckedBorder) {
+        this.uncheckedBorder = uncheckedBorder;
+        unchecked.setBorderColor(uncheckedBorder);
+    }
+
+    public int getPressedFill() {
+        return pressedFill;
+    }
+
+    public void setPressedFill(int pressedFill) {
+        this.pressedFill = pressedFill;
+        pressed.setFillColor(pressedFill);
+    }
+
+    public int getPressedBorder() {
+        return pressedBorder;
+    }
+
+    public void setPressedBorder(int pressedBorder) {
+        this.pressedBorder = pressedBorder;
+        pressed.setBorderColor(pressedBorder);
+    }
+
+    public int getOffTextColor() {
+        return offTextColor;
+    }
+
+    public void setOffTextColor(int offTextColor) {
+        this.offTextColor = offTextColor;
+        textColor = new ToggleTextColor(onTextColor, offTextColor);
+    }
+
+    public int getOnTextColor() {
+        return onTextColor;
+    }
+
+    public void setOnTextColor(int onTextColor) {
+        this.onTextColor = onTextColor;
+        textColor = new ToggleTextColor(onTextColor, offTextColor);
     }
 }
