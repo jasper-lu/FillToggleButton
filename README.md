@@ -3,7 +3,7 @@ Toggle Button that fills in with a defined color
 
 ![](/src/main/res/drawable/demo_imgs.png)
 ##How to Use
-TODO: Publish to central maven
+TODO: Publish to central maven -- waiting for sonatype setup
 
 For now, just download the library and add it as a module. 
 
